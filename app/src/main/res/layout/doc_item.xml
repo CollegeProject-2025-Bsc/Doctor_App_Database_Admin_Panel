@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="20.dp"
+    android:backgroundTint="#B9550562"
+    android:layout_marginBottom="10.dp"
+    android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:padding="10.dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/dName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textColor="@color/white"
+            android:textSize="17.dp"
+            android:layout_marginBottom="5.dp"/>
+        <TextView
+            android:id="@+id/dId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Id"
+            android:textColor="@color/white"
+            android:textSize="17.dp"
+            android:layout_marginTop="5.dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/visit"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="5.dp"
+                android:backgroundTint="#550562"
+                android:textColor="@color/white"
+                android:text="visit time"/>
+            <Button
+                android:id="@+id/edit"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="5.dp"
+                android:textColor="@color/white"
+                android:backgroundTint="#550562"
+                android:text="edit doctor"/>
+            <Button
+                android:id="@+id/delete"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5.dp"
+                android:backgroundTint="#550562"
+                android:textColor="@color/white"
+                android:layout_weight="1"
+                android:text="delete doc"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

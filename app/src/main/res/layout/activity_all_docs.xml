@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:orientation="vertical"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
+    android:paddingBottom="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AllDocs">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70.dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_arrow_back_ios_24"/>
+        <TextView
+            android:id="@+id/doctor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Doctor"
+            android:paddingStart="15.dp"
+            android:textSize="30.dp"
+            android:layout_gravity="center_vertical"/>
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/allRec"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

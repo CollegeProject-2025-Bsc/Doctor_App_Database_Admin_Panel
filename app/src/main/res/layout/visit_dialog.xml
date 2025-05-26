@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="20.dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Morning :"/>
+    <EditText
+        android:id="@+id/morning"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="10-11"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="AfterNoon :"/>
+    <EditText
+        android:id="@+id/afternoon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="1-2"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Evening :"/>
+    <EditText
+        android:id="@+id/evening"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="6-8"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/red"
+        android:gravity="center"
+        android:text="If no visiting time for any field then enter no "/>
+</LinearLayout>

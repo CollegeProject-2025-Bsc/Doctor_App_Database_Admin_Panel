@@ -70,32 +70,87 @@ class AllDocAdapter(
         visit.setOnClickListener {
             val view = LayoutInflater.from(holder.itemView.context)
                 .inflate(R.layout.visit_dialog, null, false)
-            val alert = MaterialAlertDialogBuilder(holder.itemView.context)
+            val mMorning = view.findViewById<EditText>(R.id.mMorning)
+            val mAfternoon = view.findViewById<EditText>(R.id.mAfternoon)
+            val mEvening = view.findViewById<EditText>(R.id.mEvening)
+
+            val tMorning = view.findViewById<EditText>(R.id.tMorning)
+            val tAfternoon = view.findViewById<EditText>(R.id.tAfternoon)
+            val tEvening = view.findViewById<EditText>(R.id.tEvening)
+
+            val wMorning = view.findViewById<EditText>(R.id.wMorning)
+            val wAfternoon = view.findViewById<EditText>(R.id.wAfternoon)
+            val wEvening = view.findViewById<EditText>(R.id.wEvening)
+
+            val thMorning = view.findViewById<EditText>(R.id.thMorning)
+            val thAfternoon = view.findViewById<EditText>(R.id.thAfternoon)
+            val thEvening = view.findViewById<EditText>(R.id.thEvening)
+
+            val fMorning = view.findViewById<EditText>(R.id.fMorning)
+            val fAfternoon = view.findViewById<EditText>(R.id.fAfternoon)
+            val fEvening = view.findViewById<EditText>(R.id.fEvening)
+
+            val saMorning = view.findViewById<EditText>(R.id.saMorning)
+            val saAfternoon = view.findViewById<EditText>(R.id.saAfternoon)
+            val saEvening = view.findViewById<EditText>(R.id.saEvening)
+
+            val sMorning = view.findViewById<EditText>(R.id.sMorning)
+            val sAfternoon = view.findViewById<EditText>(R.id.sAfternoon)
+            val sEvening = view.findViewById<EditText>(R.id.sEvening)
+
+
+            MaterialAlertDialogBuilder(holder.itemView.context)
                 .setView(view)
                 .setCancelable(false)
                 .setPositiveButton("Add") { dialog, which ->
-                    val morning = view.findViewById<EditText>(R.id.morning).text.toString()
-                    val afternoon = view.findViewById<EditText>(R.id.afternoon).text.toString()
-                    val evening = view.findViewById<EditText>(R.id.evening).text.toString()
-                    if (morning.isNotEmpty() && afternoon.isNotEmpty() && evening.isNotEmpty()) {
-                        createSlot(
-                            morning,
-                            afternoon,
-                            evening,
-                            docList[position].did,
-                            depId,
-                            holder.itemView.context
-                        )
-                    } else {
-                        Toast.makeText(
-                            holder.itemView.context,
-                            "Please fill all the fields",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        return@setPositiveButton
-                    }
+                    val schedule = mapOf(
+                        "monday" to listOf(
+                            TimeSlot("morning", mMorning.text.toString().toInt()),
+                            TimeSlot("afternoon", mAfternoon.text.toString().toInt()),
+                            TimeSlot("evening", mEvening.text.toString().toInt())
+                        ),
+                        "tuesday" to listOf(
+                            TimeSlot("morning", tMorning.text.toString().toInt()),
+                            TimeSlot("afternoon", tAfternoon.text.toString().toInt()),
+                            TimeSlot("evening", tEvening.text.toString().toInt())
+                        ),
+                        "wednesday" to listOf(
+                            TimeSlot("morning", wMorning.text.toString().toInt()),
+                            TimeSlot("afternoon", wAfternoon.text.toString().toInt()),
+                            TimeSlot("evening", wEvening.text.toString().toInt())
+                        ),
+                        "thursday" to listOf(
+                            TimeSlot("morning", thMorning.text.toString().toInt()),
+                            TimeSlot("afternoon", thAfternoon.text.toString().toInt()),
+                            TimeSlot("evening", thEvening.text.toString().toInt())
+                        ),
+                        "friday" to listOf(
+                            TimeSlot("morning", fMorning.text.toString().toInt()),
+                            TimeSlot("afternoon", fAfternoon.text.toString().toInt()),
+                            TimeSlot("evening", fEvening.text.toString().toInt())
+                        ),
+                        "saturday" to listOf(
+                            TimeSlot("morning", saMorning.text.toString().toInt()),
+                            TimeSlot("afternoon", saAfternoon.text.toString().toInt()),
+                            TimeSlot("evening", saEvening.text.toString().toInt())
+                        ),
+                        "sunday" to listOf(
+                            TimeSlot("morning", sMorning.text.toString().toInt()),
+                            TimeSlot("afternoon", sAfternoon.text.toString().toInt()),
+                            TimeSlot("evening", sEvening.text.toString().toInt())
+                        ),
+                    )
+                    firebaseDB.collection("Department")
+                        .document(depId).collection("Doctors")
+                        .document(docList[position].did)
+                        .update("schedule", schedule)
+                        .addOnSuccessListener {
+                            Toast.makeText(context, "Schedule is added", Toast.LENGTH_LONG).show()
+                        }
+                        .addOnFailureListener {
+                            Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
+                        }
                     dialog.dismiss()
-
                 }
                 .setNegativeButton("cancel") { dialog, which ->
                     dialog.dismiss()
@@ -104,31 +159,5 @@ class AllDocAdapter(
         }
     }
 
-    private fun createSlot(
-        morning: String,
-        afternoon: String,
-        evening: String,
-        did: String,
-        depId: String,
-        context: Context
-    ) {
-        val sid = firebaseDB.collection("Department")
-            .document(depId).collection("Doctors")
-            .document(did).collection("VisitingSlot").document().id
 
-        firebaseDB.collection("Department").document(depId).collection("Doctors")
-            .document(did).collection("VisitingSlot").document(sid).set(VisitingSlot(
-                id = sid,
-                morning = morning,
-                afternoon = afternoon,
-                evening = evening
-            ))
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
-                    Toast.makeText(context, "Slot Added", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(context, "Slot not Added", Toast.LENGTH_SHORT).show()
-                }
-            }
-    }
 }

@@ -17,7 +17,8 @@ import com.google.firebase.firestore.QuerySnapshot
 class AllDocAdapter(
     val docList: ArrayList<DoctorModel>,
     val firebaseDB: FirebaseFirestore,
-    val depId: String
+    val depId: String,
+    val slot:Int
 ): RecyclerView.Adapter<AllDocAdapter.AllDocViewHolder>() {
     inner class AllDocViewHolder(item: View) : RecyclerView.ViewHolder(item)
 
@@ -74,6 +75,10 @@ class AllDocAdapter(
         visit.setOnClickListener {
             val view = LayoutInflater.from(holder.itemView.context)
                 .inflate(R.layout.visit_dialog, null, false)
+
+            val slotCount = view.findViewById<TextView>(R.id.slotCount)
+            slotCount.text = "Total slot - ${docList[position].slot}"
+
             val mMorning = view.findViewById<EditText>(R.id.mMorning)
             val mAfternoon = view.findViewById<EditText>(R.id.mAfternoon)
             val mEvening = view.findViewById<EditText>(R.id.mEvening)

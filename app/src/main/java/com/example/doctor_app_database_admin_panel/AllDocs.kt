@@ -17,6 +17,7 @@ class AllDocs : AppCompatActivity() {
 
         val department = intent.getStringExtra("dep").toString()
         val depId = intent.getStringExtra("id").toString()
+        val slot = intent.getIntExtra("slot",0)
 
         allDocsBinding.doctor.text = department
         firebaseDB = FirebaseFirestore.getInstance()
@@ -29,7 +30,7 @@ class AllDocs : AppCompatActivity() {
                 Log.d("@data", "onCreate: $data \n $depId")
                 doc.addAll(data!!)
                 allDocsBinding.allRec.layoutManager = LinearLayoutManager(this)
-                allDocsBinding.allRec.adapter = AllDocAdapter(doc,firebaseDB,depId)
+                allDocsBinding.allRec.adapter = AllDocAdapter(doc,firebaseDB,depId,slot)
         }
 
 
